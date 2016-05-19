@@ -1,7 +1,7 @@
 package myprojects.reversi;
 
 /**
- * Created by Asus on 03.05.2016.
+ * Created by DD on 03.05.2016.
  */
 public class FieldAnalyzer {
 

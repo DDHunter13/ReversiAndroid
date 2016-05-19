@@ -24,8 +24,7 @@ public class GridAdapter extends BaseAdapter{
         this.makeFieldVect(field);
     }
 
-    private void makeFieldVect(Field field){
-
+    public void makeFieldVect(Field field){
         if (!fieldVect.isEmpty()) {
             fieldVect.clear();
         }
