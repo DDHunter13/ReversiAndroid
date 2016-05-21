@@ -65,4 +65,23 @@ public class FieldAnalyzer {
         return flag;
     }
 
+    public static int[] getScore(Field field){
+        int[] result = new int[2];
+        result[0] = result[1] = 0;
+        for (int i = 0; i < 8; ++i) {
+            for (int j = 0; j < 8; ++j) {
+                switch (field.getCellState(i, j)) {
+                    case 1:
+                        result[0]++;
+                        break;
+                    case 2:
+                        result[1]++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return result;
+    }
 }

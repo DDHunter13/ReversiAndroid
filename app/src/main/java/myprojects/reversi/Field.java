@@ -65,6 +65,10 @@ public class Field {
         this.directionSet(i, j, 1, 1, st);
     }
 
+    public void setOneCell(int i, int j, int st){
+        fieldMatrix[i][j].setState(st);
+    }
+
     public int getCellState(int i, int j){
         return fieldMatrix[i][j].getState();
     }
