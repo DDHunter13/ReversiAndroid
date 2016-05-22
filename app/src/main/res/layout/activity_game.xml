@@ -5,19 +5,20 @@
     android:layout_height="fill_parent"
     android:weightSum="1"
     android:baselineAligned="false"
-    android:rowCount="2">
+    android:rowCount="4">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.06">
+        android:layout_weight="0.86">
+        android:layout_row=1
 
         <GridView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/field"
             android:layout_width="wrap_content"
-            android:layout_height="397dp"
+            android:layout_height="match_parent"
             android:verticalSpacing="0dp"
             android:gravity="top"
             android:horizontalSpacing="0dp"
@@ -27,18 +28,46 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.03" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="162dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.08"
+        android:numColumns="3"
         android:weightSum="1">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="144dp"
-            android:columnCount="2"
-            android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WHITE Playre&apos;s turn"
+            android:id="@+id/playerColorText"
+            android:textColor="#000000" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.46" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turns count: 1"
+            android:id="@+id/turnsCountText"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:weightSum="1"
+        android:numColumns="3">
 
             <Button
                 android:layout_width="wrap_content"
@@ -48,15 +77,18 @@
                 android:layout_weight="0.32"
                 android:layout_gravity="center"/>
 
-            <Button
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.32" />
+
+        <Button
                 android:layout_width="wrap_content"
                 android:layout_height="64dp"
                 android:text="Settings"
                 android:id="@+id/setButton"
                 android:layout_weight="0.31"
                 android:layout_gravity="center"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

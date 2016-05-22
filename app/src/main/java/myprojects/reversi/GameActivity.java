@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class GameActivity extends Activity implements OnClickListener{
     private Field field;
     private Player player1;
     private Player player2;
+    TextView colorPlayer, turnsCount;
     int gameFlag;
     Thread gameThread;
     Button butNewGame;
@@ -38,6 +40,9 @@ public class GameActivity extends Activity implements OnClickListener{
         butNewGame = (Button) findViewById(R.id.newButton);
         butNewGame.setOnClickListener(this);
         butSettings = (Button) findViewById(R.id.setButton);
+        butSettings.setOnClickListener(this);
+        colorPlayer = (TextView) findViewById(R.id.playerColorText);
+        turnsCount = (TextView) findViewById(R.id.turnsCountText);
 
         revAdapter = new GridAdapter(this, 8, 8, this.field);
         fieldGrid.setAdapter(revAdapter);
@@ -74,6 +79,7 @@ public class GameActivity extends Activity implements OnClickListener{
             }
             gameFlag++;
             refreshFieldGrid();
+            setTextLabels();
             if (FieldAnalyzer.gameOver(field)) {
                 fieldGrid.post(new Runnable() {
                     @Override
@@ -84,6 +90,25 @@ public class GameActivity extends Activity implements OnClickListener{
                 break;
             }
         }
+    }
+
+    private void setTextLabels(){
+        colorPlayer.post(new Runnable() {
+            @Override
+            public void run() {
+                if(gameFlag % 2 == 1){
+                    colorPlayer.setText("WHITE Player's turn");
+                } else{
+                    colorPlayer.setText("BLACK Player's turn");
+                }
+            }
+        });
+        turnsCount.post(new Runnable() {
+            @Override
+            public void run() {
+                turnsCount.setText("Turns Count: " + gameFlag);
+            }
+        });
     }
 
     private String getWinnerName(int[] score){
