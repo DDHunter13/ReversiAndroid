@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="1"
+    android:baselineAligned="false"
+    android:rowCount="2">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.06">
+
+        <GridView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/field"
+            android:layout_width="wrap_content"
+            android:layout_height="397dp"
+            android:verticalSpacing="0dp"
+            android:gravity="top"
+            android:horizontalSpacing="0dp"
+            android:numColumns="8"
+            android:clickable="false"
+            android:transitionGroup="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:columnCount="2"
+            android:weightSum="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:text="New Game"
+                android:id="@+id/newButton"
+                android:layout_weight="0.32"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:text="Settings"
+                android:id="@+id/setButton"
+                android:layout_weight="0.31"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

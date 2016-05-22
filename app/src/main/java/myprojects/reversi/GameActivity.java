@@ -1,16 +1,18 @@
 package myprojects.reversi;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity {
+public class GameActivity extends Activity implements OnClickListener{
 
     private GridAdapter revAdapter;
     private GridView fieldGrid;
@@ -19,12 +21,13 @@ public class MainActivity extends Activity {
     private Player player2;
     int gameFlag;
     Thread gameThread;
+    Button butNewGame;
+    Button butSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("tag", "create");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         fieldGrid = (GridView) findViewById(R.id.field);
         fieldGrid.setNumColumns(8);
@@ -32,8 +35,13 @@ public class MainActivity extends Activity {
 
         field = new Field(System.out);
 
+        butNewGame = (Button) findViewById(R.id.newButton);
+        butNewGame.setOnClickListener(this);
+        butSettings = (Button) findViewById(R.id.setButton);
+
         revAdapter = new GridAdapter(this, 8, 8, this.field);
         fieldGrid.setAdapter(revAdapter);
+
         gameThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -41,12 +49,15 @@ public class MainActivity extends Activity {
             }
         });
 
-        player1 = new HumanPlayer(1, gameThread, fieldGrid);
-        //player1 = new AIPlayer(1);
-        player2 = new AIPlayer(2);
+        Intent intent = getIntent();
+        int id1 = intent.getIntExtra("firstPlayer", R.id.radioBut1Human);
+        int id2 = intent.getIntExtra("secondPlayer", R.id.radioBut2AI);
+        player1 = id1 == R.id.radioBut1Human ? new HumanPlayer(1, gameThread, fieldGrid) : new AIPlayer(1);
+        player2 = id2 == R.id.radioBut2Human ? new HumanPlayer(2, gameThread, fieldGrid) : new AIPlayer(2);
+
         gameFlag = 1;
 
-
+        gameThread.start();
     }
 
     private void gameProcess() {
@@ -109,42 +120,26 @@ public class MainActivity extends Activity {
     }
 
     @Override
+    public void onClick(View v){
+        switch(v.getId()){
+            case R.id.newButton:
+                startActivity(new Intent(this, MenuActivity.class));
+                break;
+            case R.id.setButton:
+                //call settings Activity
+                break;
+        }
+    }
+
+    @Override
     protected void onResume(){
         super.onResume();
-        Log.d("tag", "resume");
         refreshFieldGrid();
-        gameThread.start();
-    }
-
-    @Override
-    protected void onStop(){
-        super.onStop();
-        Log.d("tag", "stop");
-    }
-
-    @Override
-    protected void onPause(){
-
-        super.onPause();
-        Log.d("tag", "pause");
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
-        Log.d("tag", "start");
-    }
-
-    @Override
-    protected void onRestart(){
-        super.onRestart();
-        Log.d("tag", "restart");
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
-        Log.d("tag", "saveState");
         ArrayList<Integer> arList = new ArrayList<>(64);
         for (int i = 0; i < 8; ++i){
             for (int j = 0; j < 8; ++j){
@@ -158,7 +153,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
-        Log.d("tag", "loadState");
         ArrayList<Integer> arList = new ArrayList<>(64);
         arList = savedInstanceState.getIntegerArrayList("FIELD");
         for (int i = 0; i < 8; ++i){
