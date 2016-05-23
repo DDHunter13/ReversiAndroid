@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 enum Style{CLASSIC, WOOD, METAL}
@@ -16,7 +17,7 @@ enum Style{CLASSIC, WOOD, METAL}
 public class GridAdapter extends BaseAdapter{
     private Context cont;
     private int collumns, rows;
-    private Vector<Integer> fieldVect;
+    private ArrayList<Integer> fieldVect;
     Style style;
 
     public GridAdapter (Context context, int cols, int rows, Field field){
@@ -24,7 +25,7 @@ public class GridAdapter extends BaseAdapter{
         this.collumns = cols;
         this.rows = rows;
         this.style = Style.CLASSIC;
-        this.fieldVect = new Vector<Integer>();
+        this.fieldVect = new ArrayList<>();
         this.makeFieldVect(field);
     }
 
