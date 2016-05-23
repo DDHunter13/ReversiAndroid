@@ -11,15 +11,19 @@ import android.widget.ImageView;
 
 import java.util.Vector;
 
+enum Style{CLASSIC, WOOD, METAL}
+
 public class GridAdapter extends BaseAdapter{
     private Context cont;
     private int collumns, rows;
     private Vector<Integer> fieldVect;
+    Style style;
 
     public GridAdapter (Context context, int cols, int rows, Field field){
         this.cont = context;
         this.collumns = cols;
         this.rows = rows;
+        this.style = Style.CLASSIC;
         this.fieldVect = new Vector<Integer>();
         this.makeFieldVect(field);
     }
@@ -33,6 +37,10 @@ public class GridAdapter extends BaseAdapter{
                 fieldVect.add(field.getCellState(j, i));
             }
         }
+    }
+
+    public void setStyle(Style st){
+        this.style = st;
     }
 
     @Override
@@ -62,14 +70,49 @@ public class GridAdapter extends BaseAdapter{
 
         switch(fieldVect.get(position)){
             case 1:
-                view.setImageResource(R.drawable.white);
+                view.setImageResource(whiteSetStyle());
                 break;
             case 2:
-                view.setImageResource(R.drawable.black);
+                view.setImageResource(blackSetStyle());
                 break;
             default:
-                view.setImageResource(R.drawable.empty);
+                view.setImageResource(emptySetStyle());
         }
         return view;
     }
+
+    private int emptySetStyle(){
+        switch(style){
+            case METAL:
+                return R.drawable.empty_metal;
+            case WOOD:
+                return R.drawable.empty_wood;
+            default:
+                return R.drawable.empty;
+        }
+    }
+
+    private int blackSetStyle(){
+        switch(style){
+            case METAL:
+                return R.drawable.black_metal;
+            case WOOD:
+                return R.drawable.black_wood;
+            default:
+                return R.drawable.black;
+        }
+    }
+
+    private int whiteSetStyle(){
+        switch(style){
+            case METAL:
+                return R.drawable.white_metal;
+            case WOOD:
+                return R.drawable.white_wood;
+            default:
+                return R.drawable.white;
+        }
+    }
+
+
 }

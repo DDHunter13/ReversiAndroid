@@ -10,7 +10,6 @@ public class Field {
     private Cell[][] fieldMatrix;
     private DataOutputStream outstr;
 
-    //Creates the empty field and places 1st 4 chips.
     Field(OutputStream ops){
         this.fieldMatrix = new Cell[8][8];
         for (int i = 0; i < 8; ++i){

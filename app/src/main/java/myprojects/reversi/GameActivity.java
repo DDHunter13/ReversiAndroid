@@ -151,9 +151,27 @@ public class GameActivity extends Activity implements OnClickListener{
                 startActivity(new Intent(this, MenuActivity.class));
                 break;
             case R.id.setButton:
-                //call settings Activity
+                startActivityForResult(new Intent(this, SettingsActivity.class), 1);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (data == null){return;}
+        int st = data.getIntExtra("STYLE", R.id.radioButClassic);
+        switch (st){
+            case R.id.radioButWood:
+                revAdapter.setStyle(Style.WOOD);
+                break;
+            case R.id.radioButMetal:
+                revAdapter.setStyle(Style.METAL);
+                break;
+            default:
+                revAdapter.setStyle(Style.CLASSIC);
+                break;
+        }
+        refreshFieldGrid();
     }
 
     @Override
