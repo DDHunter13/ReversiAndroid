@@ -25,6 +25,11 @@ public class AIPlayer implements Player {
     }
 
     public int[] chooseMove(Field field){
+        try{
+            Thread.sleep(500);
+        } catch(InterruptedException ex){
+            ex.printStackTrace();
+        }
         int[] result = new int[2];
         int totalScore = 0;
         for (int i = 0; i < 8; ++i){

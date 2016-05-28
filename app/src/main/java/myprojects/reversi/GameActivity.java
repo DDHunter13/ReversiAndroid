@@ -20,7 +20,7 @@ public class GameActivity extends Activity implements OnClickListener{
     private Field field;
     private Player player1;
     private Player player2;
-    TextView colorPlayer, turnsCount;
+    TextView colorPlayer;
     int gameFlag;
     Thread gameThread;
     Button butNewGame;
@@ -42,7 +42,6 @@ public class GameActivity extends Activity implements OnClickListener{
         butSettings = (Button) findViewById(R.id.setButton);
         butSettings.setOnClickListener(this);
         colorPlayer = (TextView) findViewById(R.id.playerColorText);
-        turnsCount = (TextView) findViewById(R.id.turnsCountText);
 
         revAdapter = new GridAdapter(this, 8, 8, this.field);
         fieldGrid.setAdapter(revAdapter);
@@ -101,12 +100,6 @@ public class GameActivity extends Activity implements OnClickListener{
                 } else{
                     colorPlayer.setText("BLACK Player's turn");
                 }
-            }
-        });
-        turnsCount.post(new Runnable() {
-            @Override
-            public void run() {
-                turnsCount.setText("Turns Count: " + gameFlag);
             }
         });
     }
